@@ -22,10 +22,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    user_params = { username: params[:username], email: params[:email], password: params[:password] }
-
-    @user.update(user_params)
-
-    redirect_to edit_user_path(@user)
+    if @user.update(user_params)
+      redirect_to edit_user_path(@user)
+    else
+      render :edit
+    end
   end
 end
